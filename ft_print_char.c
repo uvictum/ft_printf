@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 17:23:14 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 14:59:47 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/29 18:56:51 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static inline int ft_size(wchar_t wc)
 
 	b = (int)wc;
 
-	if (b < 128)
+	if (b < 128 || MB_CUR_MAX == 1)
 		return (1);
 	else if (b >= 128 && b < 2048)
 		return (2);
