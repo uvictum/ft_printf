@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:18:58 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 17:00:57 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/29 17:52:01 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ void	ft_form_buf(t_specs *specs, va_list args, t_buf *buffer)
 		ft_itoa_pr(specs, args, buffer);
 		if (buffer->buf[0] == '0' && buffer->len == 1)
 		{	
+			if ((specs->type != 5 && specs->type != 6) || specs->prec < 1)
+				specs->flags.hash = 0;
 			if (specs->prec == 1)
 			{
 				buffer->buf[0] = ' ';
 				buffer->len--;
-			}
-			if ((specs->type > 4 && specs->type < 6) || (specs->type > 8 && specs->type < 11))
-				specs->flags.hash = 0;
+			}	
 		}
 	}			
 	else if (specs->type >= 0 && specs->type <= 1)
