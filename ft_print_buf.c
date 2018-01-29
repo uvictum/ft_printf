@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 12:12:35 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 16:55:12 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/29 20:47:34 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,12 @@ void	ft_print_buf(t_specs *specs, t_buf *buffer)
 		m = 2;
 	else if (specs->type > 6 && specs->type < 9)
 		m = 1;
-	if (specs->flags.zero && specs->width)
+	if (specs->flags.zero && specs->width &&
+		specs->type > 1 && specs->type < 12)
 	{	
-		specs->prec = specs->width + 1 - specs->flags.sign - specs->flags.hash * m - specs->flags.plus * (!specs->flags.sign ? 1 : 0);
+		specs->prec = specs->width + 1 - specs->flags.sign 
+		- specs->flags.hash * m - specs->flags.plus * 
+		(!specs->flags.sign ? 1 : 0) - specs->flags.space;
 		specs->width = 0;
 	}
 	if ((*specs).prec >= 1) 

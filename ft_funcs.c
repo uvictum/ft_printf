@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 18:50:56 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/24 17:58:21 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/29 19:35:47 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	ft_char(t_specs *specs, va_list ap, t_buf *buffer)
 		ft_wchar(ap, buffer);
 		return;
 	}
+	else if (specs->type == 15)
+		return;
 	i = va_arg(ap, int);
 	c = (char)i;
 	put_buf(c, buffer);	
