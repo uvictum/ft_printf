@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:33:40 by vmorguno          #+#    #+#             */
-/*   Updated: 2017/11/10 18:54:08 by vmorguno         ###   ########.fr       */
+/*   Updated: 2017/12/07 17:50:02 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 size_t		ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (*s)
+	{
 		i++;
+		s++;
+	}
 	return (i);
 }

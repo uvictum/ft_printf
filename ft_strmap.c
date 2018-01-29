@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 17:26:45 by vmorguno          #+#    #+#             */
-/*   Updated: 2017/11/09 19:52:52 by vmorguno         ###   ########.fr       */
+/*   Updated: 2017/11/14 18:46:06 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	unsigned int	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	res = ft_strnew(ft_strlen(s));
+	if (!res)
+		return (NULL);
 	while (s[i])
 	{
 		res[i] = f(s[i]);

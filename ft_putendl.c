@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 13:46:10 by vmorguno          #+#    #+#             */
-/*   Updated: 2017/11/07 13:47:00 by vmorguno         ###   ########.fr       */
+/*   Updated: 2017/11/15 19:33:15 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_putendl(char const *s)
 {
-	return (ft_putendl_fd(s, 1));
+	if (s)
+		return (ft_putendl_fd(s, 1));
 }

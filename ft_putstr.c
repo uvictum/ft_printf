@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 13:42:28 by vmorguno          #+#    #+#             */
-/*   Updated: 2017/11/09 19:44:07 by vmorguno         ###   ########.fr       */
+/*   Updated: 2017/11/15 17:30:57 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	ft_putstr(const char *s)
 {
-	return (ft_putstr_fd(s, 1));
+	if (s)
+		return (ft_putstr_fd(s, 1));
 }

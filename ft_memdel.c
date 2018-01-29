@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 16:00:47 by vmorguno          #+#    #+#             */
-/*   Updated: 2017/11/03 15:49:38 by vmorguno         ###   ########.fr       */
+/*   Updated: 2017/11/14 19:00:27 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	ft_memdel(void **ap)
 {
-	if (*ap)
+	if (ap)
 	{
-		free(*ap);
-		*ap = NULL;
+		if (*ap)
+		{
+			free(*ap);
+			*ap = NULL;
+		}
 	}
 }

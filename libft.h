@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 13:47:25 by vmorguno          #+#    #+#             */
-/*   Updated: 2017/11/10 20:52:55 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/24 18:13:22 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int					ft_isdigit(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
-int					ft_toupper(int c);
+void				ft_toupper(char *c);
 int					ft_tolower(int c);
 int					ft_iswspace(int c);
 size_t				ft_strlen(const char *s);

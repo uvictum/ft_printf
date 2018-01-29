@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 17:15:40 by vmorguno          #+#    #+#             */
-/*   Updated: 2017/11/06 16:07:36 by vmorguno         ###   ########.fr       */
+/*   Updated: 2017/11/16 15:19:11 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	unsigned int i;
+	size_t i;
 
 	i = 0;
 	while (n > i)
