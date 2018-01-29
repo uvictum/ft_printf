@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:18:58 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 18:20:38 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/29 18:36:01 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static inline uintmax_t	ft_get_unum(t_specs *specs, va_list ap)
 {
 	uintmax_t	num;
 
-	if (ft_strchr("zjRl", specs->size))
+	if (ft_strchr("zjRl", specs->size) || specs->type == 11)
 		num = va_arg(ap, unsigned long long);
 	else
 		num = va_arg(ap, unsigned int);
