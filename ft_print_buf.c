@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 12:12:35 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/30 17:16:08 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/30 18:58:58 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static inline void	ft_modify_width(t_buf *buffer, t_specs *specs)
 	else
 		ft_rotate(buffer->buf, buffer->len);
 }
- 
+
 static inline void	ft_modify_prec(t_buf *buffer, t_specs *specs)
 {
 	int		dif;
@@ -43,22 +43,22 @@ static inline void	ft_modify_prec(t_buf *buffer, t_specs *specs)
 	if (specs->type > 1 && specs->type < 12
 		&& !((specs->type == 5 || specs->type == 6)
 		&& (specs->flags.hash)) && dif > 0)
-	{	
-		while (dif > 0) 
+	{
+		while (dif > 0)
 		{
 			put_buf('0', buffer);
 			dif--;
 		}
 	}
-	else if ((specs->type == 0 || specs->type == 1) && dif < 0) 	
+	else if ((specs->type == 0 || specs->type == 1) && dif < 0)
 	{
 		ft_bzero(buffer->buf, -dif);
 		ft_rotate(buffer->buf, buffer->len);
 		buffer->len = buffer->len + dif;
-		//ft_rotate(buffer->buf, buffer->len);
+		ft_rotate(buffer->buf, buffer->len);
 	}
 	else
-		return;
+		return ;
 }
 
 static inline void	ft_modify_prefix(t_buf *buffer, t_specs *specs)
@@ -83,9 +83,9 @@ static inline void	ft_modify_prefix(t_buf *buffer, t_specs *specs)
 		put_buf('+', buffer);
 }
 
-void	ft_print_buf(t_specs *specs, t_buf *buffer)
+void				ft_print_buf(t_specs *specs, t_buf *buffer)
 {
-	int m;
+	int		m;
 
 	m = 0;
 	if (specs->type > 8 && specs->type < 10)
@@ -94,13 +94,13 @@ void	ft_print_buf(t_specs *specs, t_buf *buffer)
 		m = 1;
 	if (specs->flags.zero && specs->width &&
 		specs->type > 1 && specs->type < 12)
-	{	
-		specs->prec = specs->width + 1 - specs->flags.sign 
-		- specs->flags.hash * m - specs->flags.plus * 
+	{
+		specs->prec = specs->width + 1 - specs->flags.sign
+		- specs->flags.hash * m - specs->flags.plus *
 		(!specs->flags.sign ? 1 : 0) - specs->flags.space;
 		specs->width = 0;
 	}
-	if ((*specs).prec >= 1) 
+	if ((*specs).prec >= 1)
 		ft_modify_prec(buffer, specs);
 	ft_modify_prefix(buffer, specs);
 	if (specs->width || (specs->type > 1 && specs->type < 12))

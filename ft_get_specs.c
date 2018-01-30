@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 16:50:23 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 20:47:32 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/30 19:06:28 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static inline int		ft_get_flags(const char *s, t_specs *specs, int len)
 	while (i < len && (s[i] < '1' || s[i] > '9'))
 	{
 		if (s[i] == '#')
-			(* specs).flags.hash = 1;
+			specs->flags.hash = 1;
 		else if (s[i] == '0')
-			(* specs).flags.zero = 1;
+			specs->flags.zero = 1;
 		else if (s[i] == '-')
-			(* specs).flags.neg = 1;
+			specs->flags.neg = 1;
 		else if (s[i] == '+')
-			(* specs).flags.plus = 1;
+			specs->flags.plus = 1;
 		else if (s[i] == ' ')
-			(* specs).flags.space = 1;
-		else 
-			break;
+			specs->flags.space = 1;
+		else
+			break ;
 		i++;
 	}
 	if (specs->type == 11)
@@ -77,12 +77,12 @@ static inline void		ft_manage_flags(t_specs *specs)
 {
 	if ((*specs).flags.neg || (*specs).prec)
 		(*specs).flags.zero = 0;
-   	if ((*specs).flags.plus) 
+	if ((*specs).flags.plus)
 		(*specs).flags.space = 0;
-	if ((specs->type == 12 || specs->type == 0) 
+	if ((specs->type == 12 || specs->type == 0)
 		&& specs->size == 'l')
 		specs->type++;
-	if	(specs->type == 3 || specs->type == 6 || specs->type == 8)
+	if (specs->type == 3 || specs->type == 6 || specs->type == 8)
 		specs->size = 'l';
 	if (specs->type > 4 && specs->flags.plus)
 		specs->flags.plus = 0;
@@ -97,11 +97,10 @@ t_specs					*ft_get_specs(const char **frmt)
 	specs = (t_specs *)ft_memalloc(sizeof(t_specs));
 	len = ft_get_type(*frmt, specs);
 	if ((s = ft_strnstr(*frmt, ".", len)))
-		specs->prec = ft_atoi(s + 1) + 1; 
+		specs->prec = ft_atoi(s + 1) + 1;
 	specs->width = ft_atoi(*frmt + ft_get_flags(*frmt, specs, len));
 	specs->size = ft_get_size(*frmt, len - 1);
 	ft_manage_flags(specs);
 	*frmt = *frmt + len;
 	return (specs);
 }
-

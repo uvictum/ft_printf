@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:14:26 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/30 15:26:26 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/30 19:10:26 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_printf(const char *format, ...)
 {
-	t_specs 		*specs;
+	t_specs			*specs;
 	va_list			args;
-	static t_buf 	buffer;
+	static t_buf	buffer;
 	int				n;
 
 	va_start(args, format);
@@ -40,5 +40,5 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	n = buffer.prntd;
 	buffer.prntd = 0;
-	return(n);
+	return (n);
 }

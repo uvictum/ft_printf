@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 18:50:56 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 19:35:47 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/30 19:16:09 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,40 @@ void	put_buf(char c, t_buf *buffer)
 	buffer->len = buffer->len + 1;
 }
 
-void	ft_rotate(char	*str, int size)
+void	ft_rotate(char *str, int size)
 {
 	int		i;
 	char	buf;
 
 	i = 0;
-
 	while (i < size)
 	{
 		buf = str[i];
 		str[i] = str[size - 1];
 		str[size - 1] = buf;
-		i ++;
+		i++;
 		size--;
 	}
 }
 
 void	ft_char(t_specs *specs, va_list ap, t_buf *buffer)
 {
-	int			i;
-	char 		c;
+	int		i;
+	char	c;
 
 	if ((*specs).type == 14)
 	{
 		put_buf('%', buffer);
-		return;
+		return ;
 	}
 	else if ((*specs).type == 13)
 	{
 		ft_wchar(ap, buffer);
-		return;
+		return ;
 	}
 	else if (specs->type == 15)
-		return;
+		return ;
 	i = va_arg(ap, int);
 	c = (char)i;
-	put_buf(c, buffer);	
+	put_buf(c, buffer);
 }

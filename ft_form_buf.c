@@ -6,13 +6,13 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:18:58 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/30 17:19:46 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/30 19:02:08 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static inline int ft_get_base(t_specs *specs)
+static inline int		ft_get_base(t_specs *specs)
 {
 	if (specs->type > 4 && specs->type < 7)
 		return (8);
@@ -52,7 +52,7 @@ static inline uintmax_t	ft_get_unum(t_specs *specs, va_list ap)
 	return (num);
 }
 
-static inline void	ft_itoa_pr(t_specs *specs, va_list ap, t_buf *buffer)
+static inline void		ft_itoa_pr(t_specs *specs, va_list ap, t_buf *buffer)
 {
 	intmax_t	n;
 	uintmax_t	p;
@@ -67,11 +67,11 @@ static inline void	ft_itoa_pr(t_specs *specs, va_list ap, t_buf *buffer)
 			specs->flags.sign = 1;
 			p = n * -1;
 		}
-		else	
-		p = n;
+		else
+			p = n;
 	}
-	else 
-	   p = ft_get_unum(specs, ap);	
+	else
+		p = ft_get_unum(specs, ap);
 	while (p / base > 0)
 	{
 		put_buf((p % base + (p % base > 9 ? 87 : 48)), buffer);
@@ -80,22 +80,22 @@ static inline void	ft_itoa_pr(t_specs *specs, va_list ap, t_buf *buffer)
 	put_buf((p % base + (p % base > 9 ? 87 : 48)), buffer);
 }
 
-void	ft_form_buf(t_specs *specs, va_list args, t_buf *buffer)
+void					ft_form_buf(t_specs *specs, va_list args, t_buf *buffer)
 {
 	if (specs->type > 1 && specs->type < 12)
 	{
 		ft_itoa_pr(specs, args, buffer);
 		if (buffer->buf[0] == '0' && buffer->len == 1 && specs->type != 11)
-		{	
+		{
 			if ((specs->type != 5 && specs->type != 6) || specs->prec < 1)
 				specs->flags.hash = 0;
 			if (specs->prec == 1)
 			{
 				buffer->buf[0] = ' ';
 				buffer->len--;
-			}	
+			}
 		}
-	}			
+	}
 	else if (specs->type >= 0 && specs->type <= 1)
 		ft_str(specs, args, buffer);
 	else
