@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 13:18:58 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 19:35:52 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:19:46 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,7 @@ void	ft_form_buf(t_specs *specs, va_list args, t_buf *buffer)
 		}
 	}			
 	else if (specs->type >= 0 && specs->type <= 1)
-	{
 		ft_str(specs, args, buffer);
-		ft_rotate(buffer->buf, buffer->len);
-	}
 	else
 		ft_char(specs, args, buffer);
 }

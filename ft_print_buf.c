@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 12:12:35 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 20:47:34 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/30 17:16:08 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static inline void	ft_modify_prec(t_buf *buffer, t_specs *specs)
 	int		dif;
 
 	dif = (specs->prec - 1) - buffer->len;
-	if (specs->type > 1 && specs->type < 11
+	if (specs->type > 1 && specs->type < 12
 		&& !((specs->type == 5 || specs->type == 6)
 		&& (specs->flags.hash)) && dif > 0)
 	{	
@@ -55,7 +55,7 @@ static inline void	ft_modify_prec(t_buf *buffer, t_specs *specs)
 		ft_bzero(buffer->buf, -dif);
 		ft_rotate(buffer->buf, buffer->len);
 		buffer->len = buffer->len + dif;
-		ft_rotate(buffer->buf, buffer->len);
+		//ft_rotate(buffer->buf, buffer->len);
 	}
 	else
 		return;
@@ -103,7 +103,8 @@ void	ft_print_buf(t_specs *specs, t_buf *buffer)
 	if ((*specs).prec >= 1) 
 		ft_modify_prec(buffer, specs);
 	ft_modify_prefix(buffer, specs);
-	ft_modify_width(buffer, specs);
+	if (specs->width || (specs->type > 1 && specs->type < 12))
+		ft_modify_width(buffer, specs);
 	write(1, buffer->buf, buffer->len);
 	ft_bzero(buffer->buf, buffer->len);
 	buffer->prntd = buffer->prntd + buffer->len;

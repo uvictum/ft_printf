@@ -6,15 +6,15 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 17:23:14 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 19:13:02 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/30 18:37:48 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static inline void	ft_put_bin(int b, int bit_n, t_buf *buffer)
+static inline void	ft_put_bin(unsigned int b, int bit_n, t_buf *buffer)
 {
-	int				mask[4] = {192, 224, 240, 128};
+	int				mask[5] = {192, 224, 240, 128, 63};
 	unsigned char	cw;
 
 	if (bit_n == 1)
@@ -22,12 +22,12 @@ static inline void	ft_put_bin(int b, int bit_n, t_buf *buffer)
 		put_buf((char)b, buffer);
 		return;
 	}
-	cw = ((b << (6 * (bit_n - 1))) << (25 + bit_n)) >> (25 + bit_n);
+	cw = ((b >> (6 * (bit_n - 1))) << (25 + bit_n)) >> (25 + bit_n);
 	put_buf((cw | mask[bit_n - 2]), buffer);
 	bit_n --;
 	while (bit_n > 0)
 	{
-		cw = (((b << (6 * (bit_n - 1))) << (25 + bit_n)) >> (25 + bit_n));
+		cw = ((b >> (6 * (bit_n - 1))) & mask[4]);
 		put_buf((cw | mask[3]), buffer);
 		bit_n --;
 	}
@@ -35,9 +35,9 @@ static inline void	ft_put_bin(int b, int bit_n, t_buf *buffer)
 
 static inline int ft_size(wchar_t wc)
 {
-	int				b;
+	unsigned int	b;
 
-	b = (int)wc;
+	b = (unsigned int)wc;
 
 	if (b < 128 || MB_CUR_MAX == 1)
 		return (1);
@@ -68,7 +68,10 @@ void	ft_str(t_specs *specs, va_list ap, t_buf *buffer)
 
 	i = 0;
 	if (specs->type == 1 || specs->size == 'l')
+	{
 		ft_wstr(ap, buffer);
+		return;
+	}
 	str = va_arg(ap, char *);
 	if (str)
 		while (*str)
@@ -82,6 +85,8 @@ void	ft_str(t_specs *specs, va_list ap, t_buf *buffer)
 			put_buf(N_c[i], buffer);
 			i++;
 		}
+	if (specs->prec >= 1 || specs->width)
+		ft_rotate(buffer->buf, buffer->len);
 }
 
 void	ft_wchar(va_list ap, t_buf *buffer)

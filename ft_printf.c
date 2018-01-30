@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:14:26 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/29 20:03:25 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/01/30 15:26:26 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_printf(const char *format, ...)
 			specs = ft_get_specs(&format);
 			ft_form_buf(specs, args, &buffer);
 			ft_print_buf(specs, &buffer);
+			free(specs);
 		}
 		else
 		{
