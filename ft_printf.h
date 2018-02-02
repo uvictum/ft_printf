@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 14:15:28 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/30 19:08:31 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/02 17:23:22 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 # define BUFF_SIZE 2048
 
 # include <stdarg.h>
-# include <unistd.h>
 # include <stdint.h>
-# include <wchar.h>
 # include "libft.h"
 
 typedef struct		s_flags {

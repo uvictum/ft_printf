@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 12:12:35 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/30 18:58:58 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/02 18:20:21 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static inline void	ft_modify_width(t_buf *buffer, t_specs *specs)
 
 	if ((dif = specs->width - buffer->len) > 0)
 	{
-		if (specs->flags.neg)
+		if (specs->flags.neg || specs->type == 1)
 			ft_rotate(buffer->buf, buffer->len);
 		while (dif > 0)
 		{
@@ -31,7 +31,7 @@ static inline void	ft_modify_width(t_buf *buffer, t_specs *specs)
 		if (!(specs->flags.neg))
 			ft_rotate(buffer->buf, buffer->len);
 	}
-	else
+	else if (specs->type != 1 && specs->type != 13)
 		ft_rotate(buffer->buf, buffer->len);
 }
 
@@ -50,12 +50,12 @@ static inline void	ft_modify_prec(t_buf *buffer, t_specs *specs)
 			dif--;
 		}
 	}
-	else if ((specs->type == 0 || specs->type == 1) && dif < 0)
+	else if (specs->type == 0  && dif < 0)
 	{
-		ft_bzero(buffer->buf, -dif);
-		ft_rotate(buffer->buf, buffer->len);
-		buffer->len = buffer->len + dif;
-		ft_rotate(buffer->buf, buffer->len);
+			ft_bzero(buffer->buf, -dif);
+			ft_rotate(buffer->buf, buffer->len);
+			buffer->len = buffer->len + dif;
+			ft_rotate(buffer->buf, buffer->len);
 	}
 	else
 		return ;
@@ -88,7 +88,7 @@ void				ft_print_buf(t_specs *specs, t_buf *buffer)
 	int		m;
 
 	m = 0;
-	if (specs->type > 8 && specs->type < 10)
+	if (specs->type > 8 && specs->type < 12)
 		m = 2;
 	else if (specs->type > 6 && specs->type < 9)
 		m = 1;
@@ -103,8 +103,7 @@ void				ft_print_buf(t_specs *specs, t_buf *buffer)
 	if ((*specs).prec >= 1)
 		ft_modify_prec(buffer, specs);
 	ft_modify_prefix(buffer, specs);
-	if (specs->width || (specs->type > 1 && specs->type < 12))
-		ft_modify_width(buffer, specs);
+	ft_modify_width(buffer, specs);
 	write(1, buffer->buf, buffer->len);
 	ft_bzero(buffer->buf, buffer->len);
 	buffer->prntd = buffer->prntd + buffer->len;

@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 13:47:25 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/24 18:13:22 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/02 17:24:35 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdio.h>
+# include <wchar.h>
 
 typedef	struct		s_list
 {
@@ -85,6 +86,7 @@ char				**ft_strsplit(char const *s, char c);
 int					ft_skipc(char *s, char c);
 char				*ft_itoa(int n);
 int					ft_intlen(int n);
+int					ft_wstrlen(wchar_t *s);
 int					ft_sqr(int n, int pwr);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putstr_fd(char const *s, int fd);

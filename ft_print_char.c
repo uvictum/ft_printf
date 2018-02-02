@@ -6,7 +6,7 @@
 /*   By: vmorguno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 17:23:14 by vmorguno          #+#    #+#             */
-/*   Updated: 2018/01/30 19:14:04 by vmorguno         ###   ########.fr       */
+/*   Updated: 2018/02/02 18:05:04 by vmorguno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,31 @@ static inline int		ft_size(wchar_t wc)
 		return (4);
 }
 
-static inline void		ft_wstr(va_list ap, t_buf *buffer)
+static inline void		ft_wstr(va_list ap, t_buf *buffer, t_specs *specs)
 {
 	wchar_t		*s;
+	int			i;
+	char		n_c[7] = "(null)";
 
 	s = va_arg(ap, wchar_t *);
-	while (*s)
+	if (!s)
+	{
+		i = 0;
+		while (i < 6)
+		{
+			put_buf(n_c[i], buffer);
+			i++;
+		}
+		return ;
+	}
+	if (specs->prec >= 1)
+		i = specs->prec - 1;
+	else
+		i = ft_wstrlen(s) * 4;
+	while (*s && (ft_size(*s) <= i))
 	{
 		ft_put_bin(*s, ft_size(*s), buffer);
+		i = i - ft_size(*s);
 		s++;
 	}
 }
@@ -69,7 +86,7 @@ void					ft_str(t_specs *specs, va_list ap, t_buf *buffer)
 	i = 0;
 	if (specs->type == 1 || specs->size == 'l')
 	{
-		ft_wstr(ap, buffer);
+		ft_wstr(ap, buffer, specs);
 		return ;
 	}
 	str = va_arg(ap, char *);
@@ -85,8 +102,7 @@ void					ft_str(t_specs *specs, va_list ap, t_buf *buffer)
 			put_buf(n_c[i], buffer);
 			i++;
 		}
-	if (specs->prec >= 1 || specs->width)
-		ft_rotate(buffer->buf, buffer->len);
+	ft_rotate(buffer->buf, buffer->len);
 }
 
 void					ft_wchar(va_list ap, t_buf *buffer)
